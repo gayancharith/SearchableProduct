@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>First React App</title>
+	<script src="react.min.js"></script>
+	<script src="JSXTransformer.js"></script>
+	<script src="jquery.min.js"></script>
+	<script src="showdown.js"></script>
+</head>
+<body>
+	<div id="content"></div>
+
+	<script type="text/jsx">
+		var SearchBar = React.createClass({
+			update: function(){
+				var inputValue = this.refs.search.getDOMNode().value;
+				this.props.onUserInput(inputValue);
+			},
+
+			render: function(){
+				return(
+					<div className="searchBar">
+						<input ref="search" onChange={this.update} className="searchInput" placeholder="Search ..." type="text"  />
+					</div>
+				);
+			}
+		});
+
+		var ProductTable = React.createClass({			
+			render: function(){
+				return(
+					<div> I love React </div>					
+				);
+			}
+		});
+
+		var FilterProductTable = React.createClass({
+			handleUserInput: function(searchText){
+				this.refs.filterText.getDOMNode().value = searchText;
+			},
+
+			render: function(){
+				return(
+					<div>
+						<SearchBar onUserInput={this.handleUserInput} />
+						<input ref="filterText" type="text" />
+					</div>
+				);
+			}
+		});
+
+		React.render(
+			<FilterProductTable />,
+			document.getElementById('content')
+		);
+	</script>
+</body>
+</html>
